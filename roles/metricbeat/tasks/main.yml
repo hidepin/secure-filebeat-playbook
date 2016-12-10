@@ -26,6 +26,7 @@
       mode=0644
       backup=yes
     register: is_metricbeat_setting
+    notify: metricbeat restart
 
   always:
   - name: metricbeat common backup settings
@@ -35,3 +36,6 @@
       - "{{ is_metricbeat_setting|default() }}"
     loop_control:
       loop_var: backup_item
+
+- name: enable metricbeat service
+  service: name=metricbeat state=started enabled=yes daemon_reload=yes
