@@ -21,9 +21,11 @@ metricbeat.modules:
 
     # Per CPU core stats
     #- core
+    - core
 
     # IO stats
     #- diskio
+    - diskio
 
     # Per filesystem stats
     - filesystem
@@ -42,6 +44,7 @@ metricbeat.modules:
   enabled: true
   period: 10s
   processes: ['.*']
+  cpu_ticks: true
 
 
 
