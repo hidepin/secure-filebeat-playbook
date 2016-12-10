@@ -17,10 +17,21 @@
   - name: metricbeat install
     package: name=metricbeat state=latest
 
+  - name: metricbeat setting
+    template: >
+      src=metricbeat.yml.j2
+      dest=/etc/metricbeat/metricbeat.yml
+      owner=root
+      group=root
+      mode=0644
+      backup=yes
+    register: is_metricbeat_setting
+
   always:
   - name: metricbeat common backup settings
     include: backup.yml
     with_flattened:
       - "{{ is_elastic_repo_setting|default() }}"
+      - "{{ is_metricbeat_setting|default() }}"
     loop_control:
       loop_var: backup_item
