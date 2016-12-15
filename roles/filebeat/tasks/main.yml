@@ -17,9 +17,9 @@
   - name: filebeat install
     package: name=filebeat state=latest
 
-  - name: metricbeat setting
+  - name: filebeat setting
     template: >
-      src=metricbeat.yml.j2
+      src=filebeat.yml.j2
       dest=/etc/filebeat/filebeat.yml
       owner=root
       group=root
@@ -29,7 +29,7 @@
 #    notify: filebeat restart
 
   always:
-  - name: metricbeat common backup settings
+  - name: filebeat common backup settings
     include: backup.yml
     with_flattened:
       - "{{ is_elastic_repo_setting|default() }}"
