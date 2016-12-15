@@ -2,7 +2,7 @@
 # file: all.yml
 - hosts: all
   roles:
-    - { role: metricbeat, when: "ansible_os_family == 'RedHat'" }
+    - { role: filebeat, when: "ansible_os_family == 'RedHat'" }
 
   environment:
     - "{{ proxy_env }}"
