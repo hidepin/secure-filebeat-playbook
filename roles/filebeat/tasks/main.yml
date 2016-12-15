@@ -26,7 +26,7 @@
       mode=0644
       backup=yes
     register: is_filebeat_setting
-#    notify: filebeat restart
+    notify: filebeat restart
 
   always:
   - name: filebeat common backup settings
@@ -37,5 +37,5 @@
     loop_control:
       loop_var: backup_item
 
-#- name: enable filebeat service
-#  service: name=filebeat state=started enabled=yes daemon_reload=yes
+- name: enable filebeat service
+  service: name=filebeat state=started enabled=yes daemon_reload=yes
