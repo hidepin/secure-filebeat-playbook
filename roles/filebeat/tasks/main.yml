@@ -1,5 +1,5 @@
 ---
-# file: roles/metricbeat/tasks/main.yml
+# file: roles/filebeat/tasks/main.yml
 - name: register subscription and yum proxy setting
   include: yum_setup.yml
 
@@ -14,28 +14,28 @@
       backup=yes
     register: is_elastic_repo_setting
 
-  - name: metricbeat install
-    package: name=metricbeat state=latest
+  - name: filebeat install
+    package: name=filebeat state=latest
 
   - name: metricbeat setting
     template: >
       src=metricbeat.yml.j2
-      dest=/etc/metricbeat/metricbeat.yml
+      dest=/etc/filebeat/filebeat.yml
       owner=root
       group=root
       mode=0644
       backup=yes
-    register: is_metricbeat_setting
-    notify: metricbeat restart
+    register: is_filebeat_setting
+#    notify: filebeat restart
 
   always:
   - name: metricbeat common backup settings
     include: backup.yml
     with_flattened:
       - "{{ is_elastic_repo_setting|default() }}"
-      - "{{ is_metricbeat_setting|default() }}"
+      - "{{ is_filebeat_setting|default() }}"
     loop_control:
       loop_var: backup_item
 
-- name: enable metricbeat service
-  service: name=metricbeat state=started enabled=yes daemon_reload=yes
+#- name: enable filebeat service
+#  service: name=filebeat state=started enabled=yes daemon_reload=yes

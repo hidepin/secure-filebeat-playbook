@@ -1,4 +1,4 @@
 ---
-# file: roles/metricbeat/handlers/main.yml
-- name: metricbeat restart
-  service: name=metricbeat state=restarted
+# file: roles/filebeat/handlers/main.yml
+- name: filebeat restart
+  service: name=filebeat state=restarted

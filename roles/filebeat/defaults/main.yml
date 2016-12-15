@@ -1,5 +1,5 @@
 ---
-# file: roles/metricbeat/defaults/main.yml
+# file: roles/filebeat/defaults/main.yml
 proxy_env:
   no_proxy: '*'
 #  http_proxy: http://172.16.111.1:8080
